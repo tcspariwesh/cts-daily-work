@@ -1,4 +1,4 @@
-// const s1 = new String("Ram");
+// const s1 = new String("Ram");  ""
 const s2 = new String("Ram");
 s2.concat(" Kumar");
 const s3 = `Ram ${lastName}`;
