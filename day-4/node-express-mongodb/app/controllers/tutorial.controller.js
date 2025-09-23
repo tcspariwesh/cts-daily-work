@@ -1,23 +1,25 @@
 const db = require("../models");
+const { checkDuplicateTitle } = require("../utils/validations");
 const Tutorial = db.tutorials;
 
 // Create and Save a new Tutorial
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body.title) {
+  if (!req.body.title.trim()) {
     res.status(400).send({ message: "Content can not be empty!" });
     return;
   }
-
+  checkDuplicateTitle(req.body.title);
   // Create a Tutorial
-  const tutorial = new Tutorial({
+  const tutorial = new Tutorial({ //mongoose model object
     title: req.body.title,
     description: req.body.description,
     published: req.body.published ? req.body.published : false
   });
-
+//here?
   // Save Tutorial in the database
-  tutorial.save(tutorial)
+  tutorial
+    .save(tutorial)
     .then(data => {
       res.send(data);
     })
@@ -100,7 +102,7 @@ exports.delete = (req, res) => {
         });
       } else {
         res.send({
-          message: "Tutorial was deleted successfully!"
+          message: "Tutorial was deleted successfully!" //bad practice to send message like this
         });
       }
     })

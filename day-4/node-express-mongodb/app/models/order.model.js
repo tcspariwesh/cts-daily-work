@@ -10,13 +10,8 @@ module.exports = mongoose => {
     { timestamps: true, versionKey: false  }
   );
 
-  schema.method("toJSON", function() {
-    const { _id, title, ...object } = this.toObject();
-    object.customer_id = _id;
-    object.name = title;
-    return object;
-  });
 
-  const Tutorial = mongoose.model("tutorial", schema);
+
+  const Tutorial = mongoose.model("orders", schema);
   return Tutorial;
 };
