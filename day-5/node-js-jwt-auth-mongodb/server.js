@@ -82,4 +82,9 @@ function initial() {
       });
     }
   });
+    //global error handler
+  app.use((err, req, res, next) => { //middleware 
+    console.error(err.stack); // Log error
+    res.status(err.status || 500).json({ error:  'Internalnew  Server Error' });
+  });
 }
