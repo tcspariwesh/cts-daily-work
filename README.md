@@ -1,8 +1,8 @@
 # link for Redis db
 https://drive.google.com/file/d/1_mtkpKJOvOnI7oIThKrGPQ_RsmRD9yBv/view?usp=drive_link
 
-
-onst mockRequest = (options) => ({
+# How to mock request and response objects:
+const mockRequest = (options) => ({
   // Common request properties to mock
   params: options.params || {},
   query: options.query || {},
@@ -24,3 +24,10 @@ const mockResponse = () => {
 // Example usage in a test:
 const req = mockRequest({ params: { id: '123' }, body: { name: 'Test' } });
 const res = mockResponse();
+
+// Call your controller/middleware with the mocks
+yourController(req, res);
+
+// Assertions
+expect(res.status).toHaveBeenCalledWith(200);
+expect(res.json).toHaveBeenCalledWith({ message: 'Success' });
